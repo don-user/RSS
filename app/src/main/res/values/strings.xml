@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">RSS news</string>
+    <string name="favourites">избранное</string>
+    <string name="news">новости</string>
+    <string name="BreakingNews">Важные новости</string>
+    <string name="HardNews">Новости - хард</string>
+    <string name="gadgetsNews">Новости - гаджеты</string>
+    <string name="softNews">Новости - софт</string>
+    <string name="gameNews">Новости - игры</string>
+</resources>
