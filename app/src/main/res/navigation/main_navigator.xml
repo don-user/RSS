@@ -8,11 +8,11 @@
 
     <fragment
         android:id="@+id/news"
-        android:name="ru.yundon.rss.ui.news.FragmentNews"
+        android:name="ru.yundon.rss.presantation.ui.news.FragmentNews"
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/favourites"
-        android:name="ru.yundon.rss.ui.favorites.FragmentFavourites"
+        android:name="ru.yundon.rss.presantation.ui.favorites.FragmentFavourites"
         tools:layout="@layout/fragment_favourites" />
 
 
