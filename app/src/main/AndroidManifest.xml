@@ -14,10 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RSS">
         <activity
-            android:name="ru.yundon.rss.ui.secondactivity.NewsRecyclerActivity"
+            android:name="ru.yundon.rss.presantation.ui.secondactivity.NewsRecyclerActivity"
             android:exported="false" />
         <activity
-            android:name="ru.yundon.rss.ui.MainActivity"
+            android:name="ru.yundon.rss.presantation.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action
