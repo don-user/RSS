@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.databinding.ActivityNewsRecyclerBinding
-import ru.yundon.rss.data.room.database.RssDbModel
+import ru.yundon.rss.data.database.RssDbModel
 import ru.yundon.rss.utils.Constants.EXTRA
 import ru.yundon.rss.utils.Constants.MESSAGE_ERROR
 import ru.yundon.rss.utils.Constants.MESSAGE_IS_FAVORITES

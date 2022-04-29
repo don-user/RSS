@@ -1,8 +1,8 @@
-package ru.yundon.rss.data.room.repository
+package ru.yundon.rss.data.repository
 
 import ru.yundon.rss.data.api.dto.RssItemDto
 import ru.yundon.rss.data.api.response.RssApiClient
-import ru.yundon.rss.data.room.database.RssDbModel
+import ru.yundon.rss.data.database.RssDbModel
 import ru.yundon.rss.utils.Constants.BREAKING_NEWS
 import ru.yundon.rss.utils.Constants.GADGETS_NEWS
 import ru.yundon.rss.utils.Constants.GAMES_NEWS

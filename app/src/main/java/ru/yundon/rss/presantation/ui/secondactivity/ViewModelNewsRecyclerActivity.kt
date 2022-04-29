@@ -7,9 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.yundon.rss.data.room.database.RssDbModel
-import ru.yundon.rss.data.room.repository.LocalRssRepository
-import ru.yundon.rss.data.room.repository.RssRemoteData
+import ru.yundon.rss.data.database.RssDbModel
+import ru.yundon.rss.data.repository.LocalRssRepository
+import ru.yundon.rss.data.repository.RssRemoteData
 
 class ViewModelNewsRecyclerActivity(application: Application): AndroidViewModel(application) {
 

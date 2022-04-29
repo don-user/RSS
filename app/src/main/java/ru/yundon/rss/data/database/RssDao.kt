@@ -1,4 +1,4 @@
-package ru.yundon.rss.data.room.database
+package ru.yundon.rss.data.database
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
@@ -9,10 +9,10 @@ interface RssDao {
     @Query("SELECT * FROM rss_table")
     fun getListRssNews(): Flow<List<RssDbModel>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertRssNewsItem(item: RssDbModel)
+    suspend fun insertRssNews(): Flow<List<RssDbModel>>
 
-    @Delete
-    suspend fun deleteItem(item: RssDbModel)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertRssNewsList(list: List<RssDbModel>)
+
 
 }

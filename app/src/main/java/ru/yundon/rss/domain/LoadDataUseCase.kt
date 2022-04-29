@@ -4,5 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 class LoadDataUseCase(private val repository: RssRepository){
 
-    operator fun invoke(newsName: String) = repository.loadDataFromApi()
+    suspend operator fun invoke(newsName: String) : Boolean {
+        return repository.loadDataFromApi(newsName)
+    }
 }
