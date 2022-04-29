@@ -7,12 +7,12 @@ import kotlinx.coroutines.flow.Flow
 interface RssDao {
 
     @Query("SELECT * FROM rss_table")
-    fun getListRssNews(): Flow<List<RssEntity>>
+    fun getListRssNews(): Flow<List<RssDbModel>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertRssNewsItem(item: RssEntity)
+    suspend fun insertRssNewsItem(item: RssDbModel)
 
     @Delete
-    suspend fun deleteItem(item: RssEntity)
+    suspend fun deleteItem(item: RssDbModel)
 
 }

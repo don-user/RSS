@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.databinding.ActivityNewsRecyclerBinding
-import ru.yundon.rss.data.room.database.RssEntity
+import ru.yundon.rss.data.room.database.RssDbModel
 import ru.yundon.rss.utils.Constants.EXTRA
 import ru.yundon.rss.utils.Constants.MESSAGE_ERROR
 import ru.yundon.rss.utils.Constants.MESSAGE_IS_FAVORITES
@@ -26,7 +26,9 @@ class NewsRecyclerActivity : AppCompatActivity(), RssAdapter.ItemClickListener {
         binding = ActivityNewsRecyclerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        newsRecyclerActivityViewModel = ViewModelProvider(this, NewsRecyclerActivityViewModelFactory(application))[ViewModelNewsRecyclerActivity::class.java]
+        newsRecyclerActivityViewModel = ViewModelProvider(
+            this, NewsRecyclerActivityViewModelFactory(application)
+        )[ViewModelNewsRecyclerActivity::class.java]
 
         val newsName = intent.getStringExtra(EXTRA)
 
@@ -47,7 +49,7 @@ class NewsRecyclerActivity : AppCompatActivity(), RssAdapter.ItemClickListener {
     }
 
 
-    override fun onFavoriteClick(item: RssEntity) {
+    override fun onFavoriteClick(item: RssDbModel) {
         newsRecyclerActivityViewModel.apply {
             updateListForRecycle(item)
             favorites.observe(this@NewsRecyclerActivity){

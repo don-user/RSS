@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "rss_table")
-data class RssEntity(
+data class RssDbModel(
     @PrimaryKey var title: String,
     var link: String,
     var description: String,
