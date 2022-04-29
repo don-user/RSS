@@ -1,11 +1,11 @@
-package ru.yundon.rss.data.api.model
+package ru.yundon.rss.data.api.dto
 
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
 
 @Xml(name = "item")
-data class RssItem(
+data class RssItemDto(
     @PropertyElement(name="title")
     val title: String,
     @PropertyElement(name="description")
@@ -15,5 +15,5 @@ data class RssItem(
     @PropertyElement(name="pubDate")
     val pubDate: String,
     @Element(name="enclosure")
-    val enclosure: RssImage
+    val enclosure: RssImageDto
 )

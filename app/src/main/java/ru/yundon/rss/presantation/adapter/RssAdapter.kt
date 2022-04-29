@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.yundon.rss.R
-import ru.yundon.rss.data.room.database.RssEntity
+import ru.yundon.rss.data.room.database.RssDbModel
 import ru.yundon.rss.databinding.RssNewsItemBinding
 
 
 class RssAdapter(private val onItemClickListener: ItemClickListener): RecyclerView.Adapter<RssAdapter.RssViewHolder>() {
 
-        private val rssList = mutableListOf<RssEntity>()
+        private val rssList = mutableListOf<RssDbModel>()
         private lateinit var binding: RssNewsItemBinding
 
 
@@ -30,38 +30,38 @@ class RssAdapter(private val onItemClickListener: ItemClickListener): RecyclerVi
 
         class RssViewHolder(private val itemBinding: RssNewsItemBinding): RecyclerView.ViewHolder(itemBinding.root) {
 
-            fun bind(listEntity: RssEntity, onItemCallback: ItemClickListener) = with(itemBinding) {
+            fun bind(listDbModel: RssDbModel, onItemCallback: ItemClickListener) = with(itemBinding) {
 
-                dateNews.text = listEntity.pubDate
-                nameNews.text = listEntity.title
-                itemLink.text = listEntity.link
+                dateNews.text = listDbModel.pubDate
+                nameNews.text = listDbModel.title
+                itemLink.text = listDbModel.link
 
                 Picasso.get()
-                    .load(listEntity.imageUrl)
+                    .load(listDbModel.imageUrl)
                     .fit()
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .into(image)
 
                 favoritesImage.setImageResource(
-                    if (listEntity.isFavorites) R.drawable.favorite_orange
+                    if (listDbModel.isFavorites) R.drawable.favorite_orange
                     else R.drawable.favorite_border_orange
                 )
 
                 favoritesImage.setOnClickListener {
-                    onItemCallback.onFavoriteClick(listEntity)
+                    onItemCallback.onFavoriteClick(listDbModel)
                 }
             }
         }
 
         @SuppressLint("NotifyDataSetChanged")
-        fun updateRssList(listEntity: List<RssEntity>){
+        fun updateRssList(listDbModel: List<RssDbModel>){
             rssList.clear()
-            rssList.addAll(listEntity)
+            rssList.addAll(listDbModel)
             notifyDataSetChanged()
         }
 
     interface ItemClickListener {
-        fun onFavoriteClick(item: RssEntity)
+        fun onFavoriteClick(item: RssDbModel)
     }
 }
 

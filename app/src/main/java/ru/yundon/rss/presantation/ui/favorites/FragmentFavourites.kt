@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.databinding.FragmentFavouritesBinding
-import ru.yundon.rss.data.room.database.RssEntity
+import ru.yundon.rss.data.room.database.RssDbModel
 import ru.yundon.rss.utils.Constants.MESSAGE_IS_NOT_FAVORITES
 
 class FragmentFavourites: Fragment(), RssAdapter.ItemClickListener {
@@ -20,17 +20,21 @@ class FragmentFavourites: Fragment(), RssAdapter.ItemClickListener {
     private lateinit var binding: FragmentFavouritesBinding
     private lateinit var favoritesRssViewModel: ViewModelFavorites
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         binding = FragmentFavouritesBinding.inflate(inflater, container, false)
         fragmentFavorites = binding
 
-        favoritesRssViewModel = ViewModelProvider(this, FavoritesViewModelFactory(activity!!.application))[ViewModelFavorites::class.java]
+        favoritesRssViewModel = ViewModelProvider(
+            this, FavoritesViewModelFactory(requireActivity().application)
+        )[ViewModelFavorites::class.java]
         observeListRss()
         setupRecyclerView()
         return binding.root
     }
 
-      override fun onFavoriteClick(item: RssEntity) {
+      override fun onFavoriteClick(item: RssDbModel) {
         favoritesRssViewModel.apply {
             deleteFavoritesRss(item)
             Toast.makeText(context, MESSAGE_IS_NOT_FAVORITES, Toast.LENGTH_SHORT).show()

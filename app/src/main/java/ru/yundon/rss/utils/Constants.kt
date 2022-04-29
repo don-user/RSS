@@ -15,4 +15,6 @@ object Constants {
     const val MESSAGE_IS_FAVORITES = "Новость добавлена в избранное"
     const val MESSAGE_IS_NOT_FAVORITES = "Новость удалена из избранного"
     const val MESSAGE_ERROR = "ОШИБКА ОТ СЕРВЕРА, ИЛИ ПРОВЕРЬТЕ ИНТЕРНЕТ СОЕДЕНЕНИЕ"
+
+    const val EXCEPTION_MESSAGE_PARAM = "Param screen name is absent"
 }

@@ -1,22 +1,22 @@
 package ru.yundon.rss.data.api.response
 
 import retrofit2.http.GET
-import ru.yundon.rss.data.api.model.RssResponse
+import ru.yundon.rss.data.api.dto.RssResponseDto
 
 interface RssApi {
 
     @GET("breaking/rss")
-    suspend fun getBreakingNews(): RssResponse
+    suspend fun getBreakingNews(): RssResponseDto
 
     @GET("hardware-news/rss")
-    suspend fun getHardwareNews(): RssResponse
+    suspend fun getHardwareNews(): RssResponseDto
 
     @GET("gadgets/rss")
-    suspend fun getGadgetsNews(): RssResponse
+    suspend fun getGadgetsNews(): RssResponseDto
 
     @GET("software-news/rss")
-    suspend fun getSoftwareNews(): RssResponse
+    suspend fun getSoftwareNews(): RssResponseDto
 
     @GET("games/rss")
-    suspend fun getGameNews(): RssResponse
+    suspend fun getGameNews(): RssResponseDto
 }

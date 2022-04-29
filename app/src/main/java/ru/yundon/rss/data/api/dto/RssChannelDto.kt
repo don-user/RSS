@@ -1,10 +1,10 @@
-package ru.yundon.rss.data.api.model
+package ru.yundon.rss.data.api.dto
 
 import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.Xml
 
 @Xml(name = "channel")
-data class RssChannel(
+data class RssChannelDto(
     @Element(name="item")
-    val itemList: List<RssItem>
+    val itemDtoList: List<RssItemDto>
 )

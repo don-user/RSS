@@ -9,21 +9,22 @@ import androidx.fragment.app.Fragment
 import ru.yundon.rss.databinding.FragmentNewsBinding
 import ru.yundon.rss.presantation.ui.secondactivity.NewsRecyclerActivity
 import ru.yundon.rss.utils.Constants.BREAKING_NEWS
+import ru.yundon.rss.utils.Constants.EXCEPTION_MESSAGE_PARAM
 import ru.yundon.rss.utils.Constants.EXTRA
 import ru.yundon.rss.utils.Constants.GADGETS_NEWS
 import ru.yundon.rss.utils.Constants.GAMES_NEWS
 import ru.yundon.rss.utils.Constants.HARDWARE_NEWS
 import ru.yundon.rss.utils.Constants.SOFTWARE_NEWS
+import java.lang.RuntimeException
 
 class FragmentNews: Fragment() {
 
-    private var fragmentNews: FragmentNewsBinding? = null
-    private lateinit var binding: FragmentNewsBinding
+    private var _binding: FragmentNewsBinding? = null
+    private val binding: FragmentNewsBinding
+        get() = _binding ?: throw RuntimeException(EXCEPTION_MESSAGE_PARAM)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentNewsBinding.inflate(inflater, container, false)
-        fragmentNews = binding
-
+        _binding = FragmentNewsBinding.inflate(inflater, container, false)
         return binding.root
 
     }
