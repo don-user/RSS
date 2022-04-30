@@ -10,4 +10,6 @@ interface RssRepository {
 
     suspend fun isFavorites(item: RssEntity)
 
+    fun getFavoritesList(): Flow<List<RssEntity>>
+
 }

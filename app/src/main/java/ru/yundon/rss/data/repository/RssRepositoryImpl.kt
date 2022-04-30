@@ -65,4 +65,11 @@ class RssRepositoryImpl(application: Application): RssRepository {
         Log.d("TAG", "RssRepositoryImpl isFavorites ${newItemDbModel.isFavorites}")
         database.rssDao().updateRssNewsItem(newItemDbModel)
     }
+
+    override fun getFavoritesList(): Flow<List<RssEntity>> {
+        val favoritesListDbModel = database.rssDao().getFavoritesList(true)
+        return favoritesListDbModel.map {
+            mapper.mapDbModelListToEntityList(it)
+        }
+    }
 }
