@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.yundon.rss.R
-import ru.yundon.rss.data.room.database.RssDbModel
+import ru.yundon.rss.data.database.RssDbModel
 import ru.yundon.rss.databinding.RssNewsItemBinding
 
 

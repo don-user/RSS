@@ -1,4 +1,4 @@
-package ru.yundon.rss.data.room.database
+package ru.yundon.rss.data.database
 
 import android.content.Context
 import androidx.room.Database
