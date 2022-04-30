@@ -8,11 +8,12 @@ import com.squareup.picasso.Picasso
 import ru.yundon.rss.R
 import ru.yundon.rss.data.database.RssDbModel
 import ru.yundon.rss.databinding.RssNewsItemBinding
+import ru.yundon.rss.domain.RssEntity
 
 
 class RssAdapter(private val onItemClickListener: ItemClickListener): RecyclerView.Adapter<RssAdapter.RssViewHolder>() {
 
-        private val rssList = mutableListOf<RssDbModel>()
+        private val rssList = mutableListOf<RssEntity>()
         private lateinit var binding: RssNewsItemBinding
 
 
@@ -30,7 +31,7 @@ class RssAdapter(private val onItemClickListener: ItemClickListener): RecyclerVi
 
         class RssViewHolder(private val itemBinding: RssNewsItemBinding): RecyclerView.ViewHolder(itemBinding.root) {
 
-            fun bind(listDbModel: RssDbModel, onItemCallback: ItemClickListener) = with(itemBinding) {
+            fun bind(listDbModel: RssEntity, onItemCallback: ItemClickListener) = with(itemBinding) {
 
                 dateNews.text = listDbModel.pubDate
                 nameNews.text = listDbModel.title
@@ -54,14 +55,14 @@ class RssAdapter(private val onItemClickListener: ItemClickListener): RecyclerVi
         }
 
         @SuppressLint("NotifyDataSetChanged")
-        fun updateRssList(listDbModel: List<RssDbModel>){
+        fun updateRssList(listDbModel: List<RssEntity>){
             rssList.clear()
             rssList.addAll(listDbModel)
             notifyDataSetChanged()
         }
 
     interface ItemClickListener {
-        fun onFavoriteClick(item: RssDbModel)
+        fun onFavoriteClick(item: RssEntity)
     }
 }
 

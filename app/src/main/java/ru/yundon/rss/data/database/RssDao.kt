@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface RssDao {
 
-    @Query("SELECT * FROM rss_table")
-    fun getListRssNews(): Flow<List<RssDbModel>>
+    @Query("SELECT * FROM rss_table WHERE typeNews == :typeNews")
+    fun getListRssNews(typeNews: String): Flow<List<RssDbModel>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateRssNewsItem(item: RssDbModel)

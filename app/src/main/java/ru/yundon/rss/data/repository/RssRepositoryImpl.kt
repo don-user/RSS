@@ -9,15 +9,9 @@ import ru.yundon.rss.data.database.RssDatabase
 import ru.yundon.rss.data.mapper.RssMapper
 import ru.yundon.rss.domain.RssEntity
 import ru.yundon.rss.domain.RssRepository
-import ru.yundon.rss.utils.Constants.BREAKING_NEWS
-import ru.yundon.rss.utils.Constants.GADGETS_NEWS
-import ru.yundon.rss.utils.Constants.GAMES_NEWS
-import ru.yundon.rss.utils.Constants.HARDWARE_NEWS
-import ru.yundon.rss.utils.Constants.SOFTWARE_NEWS
+import ru.yundon.rss.utils.TypeOfNews
 
-class RssRepositoryImpl(
-    private val application: Application,
-): RssRepository {
+class RssRepositoryImpl(application: Application): RssRepository {
 
     private val database = RssDatabase.buildRssDatabase(application)
     private val apiService = RssApiClient.ApiRetrofit
@@ -26,23 +20,35 @@ class RssRepositoryImpl(
     override suspend fun loadDataFromApi(newsName: String) : Boolean {
         val listRssItemDto: List<RssItemDto> = try {
             when(newsName){
-                BREAKING_NEWS -> apiService.getBreakingNews().channelDto.itemDtoList
-                HARDWARE_NEWS -> apiService.getHardwareNews().channelDto.itemDtoList
-                GADGETS_NEWS -> apiService.getGadgetsNews().channelDto.itemDtoList
-                SOFTWARE_NEWS -> apiService.getSoftwareNews().channelDto.itemDtoList
-                GAMES_NEWS -> apiService.getGameNews().channelDto.itemDtoList
+                TypeOfNews.BREAKING_NEWS.newsName -> {
+                    apiService.getBreakingNews().channelDto.itemDtoList
+                }
+                TypeOfNews.HARDWARE_NEWS.newsName -> {
+                    apiService.getHardwareNews().channelDto.itemDtoList
+                }
+                TypeOfNews.GADGETS_NEWS.newsName -> {
+                    apiService.getGadgetsNews().channelDto.itemDtoList
+                }
+                TypeOfNews.SOFTWARE_NEWS.newsName -> {
+                    apiService.getSoftwareNews().channelDto.itemDtoList
+                }
+                TypeOfNews.GAMES_NEWS.newsName -> {
+                    apiService.getGameNews().channelDto.itemDtoList
+                }
                 else -> emptyList()
             }
         }catch (e: Exception){
             emptyList()
         }
-        database.rssDao().insertRssNewsList(mapper.mapDtoListToDbModelList(listRssItemDto))
+        database.rssDao().insertRssNewsList(
+            mapper.mapDtoListToDbModelList(listRssItemDto, newsName)
+        )
         return listRssItemDto.isNotEmpty()
     }
 
-    override fun getRssInfo(): Flow<List<RssEntity>> {
-        val d = database.rssDao().getListRssNews()
-        return d.map {
+    override fun getRssInfo(typeNews: String): Flow<List<RssEntity>> {
+        val listRssDbModel = database.rssDao().getListRssNews(typeNews)
+        return listRssDbModel.map {
             mapper.mapDbModelListToEntityList(it)
         }
     }

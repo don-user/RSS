@@ -6,7 +6,7 @@ interface RssRepository {
 
     suspend fun loadDataFromApi(newsName: String) : Boolean
 
-    fun getRssInfo(): Flow<List<RssEntity>>
+    fun getRssInfo(typeNews: String): Flow<List<RssEntity>>
 
     suspend fun isFavorites(item: RssEntity)
 }

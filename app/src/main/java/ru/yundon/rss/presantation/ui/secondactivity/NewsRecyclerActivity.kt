@@ -1,40 +1,39 @@
 package ru.yundon.rss.presantation.ui.secondactivity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.databinding.ActivityNewsRecyclerBinding
-import ru.yundon.rss.data.database.RssDbModel
+import ru.yundon.rss.domain.RssEntity
+import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.utils.Constants.EXTRA
 import ru.yundon.rss.utils.Constants.MESSAGE_ERROR
-import ru.yundon.rss.utils.Constants.MESSAGE_IS_FAVORITES
-import ru.yundon.rss.utils.Constants.MESSAGE_IS_NOT_FAVORITES
 
 class NewsRecyclerActivity : AppCompatActivity(), RssAdapter.ItemClickListener {
 
     private lateinit var binding: ActivityNewsRecyclerBinding
     private var adapterRss: RssAdapter = RssAdapter(this)
-    private lateinit var newsRecyclerActivityViewModel: ViewModelNewsRecyclerActivity
+    private lateinit var viewModelRss: ViewModelRssNews
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNewsRecyclerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        newsRecyclerActivityViewModel = ViewModelProvider(
-            this, NewsRecyclerActivityViewModelFactory(application)
-        )[ViewModelNewsRecyclerActivity::class.java]
+        viewModelRss = ViewModelProvider(this)[ViewModelRssNews::class.java]
 
         val newsName = intent.getStringExtra(EXTRA)
 
-        newsRecyclerActivityViewModel.getListRssEntity(newsName)
 
-        observeRssList()
+        if (newsName != null) {
+            observeRssList(newsName)
+        } else{
+            toast("ERROR: NOT DATA")
+        }
         setupRecyclerView()
         setToolbar(newsName)
 
@@ -49,14 +48,14 @@ class NewsRecyclerActivity : AppCompatActivity(), RssAdapter.ItemClickListener {
     }
 
 
-    override fun onFavoriteClick(item: RssDbModel) {
-        newsRecyclerActivityViewModel.apply {
-            updateListForRecycle(item)
-            favorites.observe(this@NewsRecyclerActivity){
-                if (!it) toast(MESSAGE_IS_NOT_FAVORITES)
-                else toast(MESSAGE_IS_FAVORITES)
-            }
-        }
+    override fun onFavoriteClick(item: RssEntity) {
+//        viewModelRss.apply {
+//            updateListForRecycle(item)
+//            favorites.observe(this@NewsRecyclerActivity){
+//                if (!it) toast(MESSAGE_IS_NOT_FAVORITES)
+//                else toast(MESSAGE_IS_FAVORITES)
+//            }
+//        }
     }
 
     private fun setupRecyclerView(){
@@ -67,12 +66,18 @@ class NewsRecyclerActivity : AppCompatActivity(), RssAdapter.ItemClickListener {
         }
     }
 
-    private fun observeRssList(){
-        newsRecyclerActivityViewModel.apply {
-            listEntityRss.observe(this@NewsRecyclerActivity){
-                if (it.isNotEmpty()) adapterRss.updateRssList(it)
-                else toast(MESSAGE_ERROR)
+    private fun observeRssList(newsName: String){
+
+        viewModelRss.apply {
+
+            loadRssInfo(newsName)
+            getListRssEntity(newsName)
+
+            getListRss.observe(this@NewsRecyclerActivity){
+                adapterRss.updateRssList(it)
             }
+
+            errorConnection.observe(this@NewsRecyclerActivity){if (!it) toast(MESSAGE_ERROR)}
             isLoading.observe(this@NewsRecyclerActivity){
                 binding.progressBarLoading.visibility = if (it) View.VISIBLE else View.GONE
             }

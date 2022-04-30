@@ -1,6 +1,6 @@
 package ru.yundon.rss.domain
 
-import kotlinx.coroutines.flow.Flow
+import ru.yundon.rss.utils.TypeOfNews
 
 class LoadDataUseCase(private val repository: RssRepository){
 

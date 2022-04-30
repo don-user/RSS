@@ -6,10 +6,11 @@ import ru.yundon.rss.domain.RssEntity
 
 class RssMapper {
 
-    fun mapDtoListToDbModelList(dtoList: List<RssItemDto>) : List<RssDbModel>{
+    fun mapDtoListToDbModelList(dtoList: List<RssItemDto>, newsName: String) : List<RssDbModel>{
         return dtoList.map {
             RssDbModel(
                 title = it.title,
+                typeNews = newsName,
                 link = it.link,
                 description = it.description,
                 pubDate = it.pubDate,
@@ -23,6 +24,7 @@ class RssMapper {
         return dbModel.map {
             RssEntity (
                 title = it.title,
+                typeNews = it.typeNews,
                 link = it.link,
                 description = it.description,
                 pubDate = it.pubDate,
@@ -34,6 +36,7 @@ class RssMapper {
 
     fun mapRssEntityToDbModel(entity: RssEntity) = RssDbModel(
         title = entity.title,
+        typeNews = entity.typeNews,
         link = entity.link,
         description = entity.description,
         pubDate = entity.pubDate,
