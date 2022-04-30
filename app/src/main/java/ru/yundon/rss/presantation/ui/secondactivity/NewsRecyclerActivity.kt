@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.yundon.rss.databinding.ActivityNewsRecyclerBinding
-import ru.yundon.rss.domain.RssEntity
 import ru.yundon.rss.presantation.adapter.RssAdapter
+import ru.yundon.rss.presantation.viewmodel.ViewModelRssNews
 import ru.yundon.rss.utils.Constants.EXTRA
 import ru.yundon.rss.utils.Constants.MESSAGE_ERROR
 

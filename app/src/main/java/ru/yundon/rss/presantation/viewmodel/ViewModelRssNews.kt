@@ -1,4 +1,4 @@
-package ru.yundon.rss.presantation.ui.secondactivity
+package ru.yundon.rss.presantation.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -11,18 +11,19 @@ class ViewModelRssNews(application: Application): AndroidViewModel(application) 
     private val repository = RssRepositoryImpl(application)
     private val getRssInfoUseCase = GetRssInfoUseCase(repository)
     private val loadDataUseCase = LoadDataUseCase(repository)
-    private val isFavorites = IsFavoritesUseCase(repository)
+    private val isFavoritesUseCase = IsFavoritesUseCase(repository)
 
     private var _getListRss = MutableLiveData<List<RssEntity>>()
     val getListRss: LiveData<List<RssEntity>>
         get() = _getListRss
 
+    val favorites = isFavoritesUseCase.getFavoritesList().asLiveData()
+
     private var _errorConnection = MutableLiveData<Boolean>()
     val errorConnection: LiveData<Boolean>
         get() = _errorConnection
 
-//    private val _favorites = MutableLiveData<Boolean>()
-//    val favorites: LiveData<Boolean> = _favorites
+
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -43,7 +44,7 @@ class ViewModelRssNews(application: Application): AndroidViewModel(application) 
     }
     fun setFavoritesStatus(item: RssEntity){
         viewModelScope.launch {
-            isFavorites.invoke(item)
+            isFavoritesUseCase.isFavorites(item)
         }
     }
 }

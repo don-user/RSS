@@ -9,6 +9,9 @@ interface RssDao {
     @Query("SELECT * FROM rss_table WHERE typeNews == :typeNews")
     fun getListRssNews(typeNews: String): Flow<List<RssDbModel>>
 
+    @Query("SELECT * FROM rss_table WHERE isFavorites == :favoritesStatus")
+    fun getFavoritesList(favoritesStatus: Boolean): Flow<List<RssDbModel>>
+
     @Update
     suspend fun updateRssNewsItem(item: RssDbModel)
 
