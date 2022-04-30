@@ -1,10 +1,11 @@
 package ru.yundon.rss.domain
 
 data class RssEntity(
-    var title: String,
-    var link: String,
-    var description: String,
-    var pubDate: String,
-    var imageUrl: String,
+    val title: String,
+    val typeNews: String,
+    val link: String,
+    val description: String,
+    val pubDate: String,
+    val imageUrl: String,
     val isFavorites: Boolean = false
 )

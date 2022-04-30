@@ -8,14 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.yundon.rss.databinding.FragmentNewsBinding
 import ru.yundon.rss.presantation.ui.secondactivity.NewsRecyclerActivity
-import ru.yundon.rss.utils.Constants.BREAKING_NEWS
 import ru.yundon.rss.utils.Constants.EXCEPTION_MESSAGE_PARAM
 import ru.yundon.rss.utils.Constants.EXTRA
-import ru.yundon.rss.utils.Constants.GADGETS_NEWS
-import ru.yundon.rss.utils.Constants.GAMES_NEWS
-import ru.yundon.rss.utils.Constants.HARDWARE_NEWS
-import ru.yundon.rss.utils.Constants.SOFTWARE_NEWS
-import java.lang.RuntimeException
+import ru.yundon.rss.utils.TypeOfNews
 
 class FragmentNews: Fragment() {
 
@@ -37,22 +32,22 @@ class FragmentNews: Fragment() {
 
     private fun buttonsClick() = with(binding){
         breakingButton.setOnClickListener {
-            launchActivity(BREAKING_NEWS)
+            launchActivity(TypeOfNews.BREAKING_NEWS.newsName)
         }
 
         hardwareButton.setOnClickListener {
-            launchActivity(HARDWARE_NEWS)
+            launchActivity(TypeOfNews.HARDWARE_NEWS.newsName)
         }
         gadgetsButton.setOnClickListener {
-            launchActivity(GADGETS_NEWS)
+            launchActivity(TypeOfNews.GADGETS_NEWS.newsName)
         }
 
         softwareButton.setOnClickListener {
-            launchActivity(SOFTWARE_NEWS)
+            launchActivity(TypeOfNews.SOFTWARE_NEWS.newsName)
         }
 
         gamesButton.setOnClickListener {
-            launchActivity(GAMES_NEWS)
+            launchActivity(TypeOfNews.GAMES_NEWS.newsName)
         }
     }
 

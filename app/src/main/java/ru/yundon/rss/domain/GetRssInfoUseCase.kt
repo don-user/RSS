@@ -1,10 +1,11 @@
 package ru.yundon.rss.domain
 
-import kotlinx.coroutines.flow.Flow
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 
 class GetRssInfoUseCase(private val repository: RssRepository) {
 
-    operator fun invoke(): Flow<List<RssEntity>> {
-        return repository.getRssInfo()
+    operator fun invoke(typeNews: String): LiveData<List<RssEntity>> {
+        return repository.getRssInfo(typeNews).asLiveData()
     }
 }
