@@ -48,6 +48,6 @@ class RssRepositoryImpl(
     }
 
     override suspend fun isFavorites(item: RssEntity) {
-        TODO("Not yet implemented")
+        return database.rssDao().updateRssNewsItem(mapper.mapRssEntityToDbModel(item))
     }
 }

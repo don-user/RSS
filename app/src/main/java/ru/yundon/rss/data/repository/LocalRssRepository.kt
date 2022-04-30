@@ -5,13 +5,13 @@ import kotlinx.coroutines.flow.Flow
 import ru.yundon.rss.data.database.RssDatabase
 import ru.yundon.rss.data.database.RssDbModel
 
-class LocalRssRepository(context: Context) {
+//class LocalRssRepository(context: Context) {
 
-    private val favoritesRss = RssDatabase.buildRssDatabase(context).rssDao()
-
-    fun getFavoritesRss(): Flow<List<RssDbModel>> {
-        return favoritesRss.getListRssNews()
-    }
+//    private val favoritesRss = RssDatabase.buildRssDatabase(context).rssDao()
+//
+//    fun getFavoritesRss(): Flow<List<RssDbModel>> {
+//        return favoritesRss.getListRssNews()
+//    }
 
 //    suspend fun insertFavoritesRssItem(item: RssDbModel){
 //        favoritesRss.insertRssNewsItem(item)
@@ -21,4 +21,4 @@ class LocalRssRepository(context: Context) {
 //        favoritesRss.deleteItem(item)
 //    }
 
-}
+//}

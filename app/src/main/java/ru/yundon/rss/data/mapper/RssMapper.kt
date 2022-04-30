@@ -32,7 +32,7 @@ class RssMapper {
         }
     }
 
-    fun mapRssEntityToDbModel(entity: RssEntity) : RssDbModel = RssDbModel(
+    fun mapRssEntityToDbModel(entity: RssEntity) = RssDbModel(
         title = entity.title,
         link = entity.link,
         description = entity.description,

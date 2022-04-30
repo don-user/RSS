@@ -9,9 +9,10 @@ interface RssDao {
     @Query("SELECT * FROM rss_table")
     fun getListRssNews(): Flow<List<RssDbModel>>
 
-    suspend fun insertRssNews(): Flow<List<RssDbModel>>
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateRssNewsItem(item: RssDbModel)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRssNewsList(list: List<RssDbModel>)
 
 
