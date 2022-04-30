@@ -15,10 +15,10 @@ import ru.yundon.rss.domain.RssEntity
 import ru.yundon.rss.presantation.ui.secondactivity.ViewModelRssNews
 import ru.yundon.rss.utils.Constants.MESSAGE_IS_NOT_FAVORITES
 
-class FragmentFavourites: Fragment(), RssAdapter.ItemClickListener {
+class FragmentFavourites: Fragment() {
 
     private var fragmentFavorites: FragmentFavouritesBinding? = null
-    private var adapterRss = RssAdapter(this)
+    private var adapterRss = RssAdapter()
     private lateinit var binding: FragmentFavouritesBinding
     private lateinit var favoritesRssViewModel: ViewModelRssNews
 
@@ -34,12 +34,12 @@ class FragmentFavourites: Fragment(), RssAdapter.ItemClickListener {
         return binding.root
     }
 
-      override fun onFavoriteClick(item: RssEntity) {
+//      override fun onFavoriteClick(item: RssEntity) {
 //        favoritesRssViewModel.apply {
 //            deleteFavoritesRss(item)
 //            Toast.makeText(context, MESSAGE_IS_NOT_FAVORITES, Toast.LENGTH_SHORT).show()
 //        }
-    }
+//    }
 
     private fun setupRecyclerView(){
         binding.rssFavoritesRecycler.apply {

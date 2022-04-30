@@ -9,4 +9,5 @@ interface RssRepository {
     fun getRssInfo(typeNews: String): Flow<List<RssEntity>>
 
     suspend fun isFavorites(item: RssEntity)
+
 }

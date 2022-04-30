@@ -1,11 +1,13 @@
 package ru.yundon.rss.data.repository
 
 import android.app.Application
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ru.yundon.rss.data.api.dto.RssItemDto
 import ru.yundon.rss.data.api.response.RssApiClient
 import ru.yundon.rss.data.database.RssDatabase
+import ru.yundon.rss.data.database.RssDbModel
 import ru.yundon.rss.data.mapper.RssMapper
 import ru.yundon.rss.domain.RssEntity
 import ru.yundon.rss.domain.RssRepository
@@ -40,6 +42,7 @@ class RssRepositoryImpl(application: Application): RssRepository {
         }catch (e: Exception){
             emptyList()
         }
+        Log.d("TAG", "loadDataFromApi $listRssItemDto")
         database.rssDao().insertRssNewsList(
             mapper.mapDtoListToDbModelList(listRssItemDto, newsName)
         )
@@ -54,6 +57,12 @@ class RssRepositoryImpl(application: Application): RssRepository {
     }
 
     override suspend fun isFavorites(item: RssEntity) {
-        return database.rssDao().updateRssNewsItem(mapper.mapRssEntityToDbModel(item))
+        val itemDbModel = mapper.mapRssEntityToDbModel(item)
+        Log.d("TAG", "RssRepositoryImpl isFavorites ${itemDbModel.isFavorites}")
+        val newItemDbModel: RssDbModel =
+            if (itemDbModel.isFavorites) itemDbModel.copy(isFavorites = false)
+            else itemDbModel.copy(isFavorites = true)
+        Log.d("TAG", "RssRepositoryImpl isFavorites ${newItemDbModel.isFavorites}")
+        database.rssDao().updateRssNewsItem(newItemDbModel)
     }
 }

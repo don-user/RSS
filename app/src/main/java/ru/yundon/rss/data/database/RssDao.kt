@@ -9,11 +9,10 @@ interface RssDao {
     @Query("SELECT * FROM rss_table WHERE typeNews == :typeNews")
     fun getListRssNews(typeNews: String): Flow<List<RssDbModel>>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update
     suspend fun updateRssNewsItem(item: RssDbModel)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertRssNewsList(list: List<RssDbModel>)
-
 
 }
