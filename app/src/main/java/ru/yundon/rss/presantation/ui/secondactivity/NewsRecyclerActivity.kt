@@ -1,6 +1,7 @@
 package ru.yundon.rss.presantation.ui.secondactivity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -13,10 +14,10 @@ import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.utils.Constants.EXTRA
 import ru.yundon.rss.utils.Constants.MESSAGE_ERROR
 
-class NewsRecyclerActivity : AppCompatActivity(), RssAdapter.ItemClickListener {
+class NewsRecyclerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewsRecyclerBinding
-    private var adapterRss: RssAdapter = RssAdapter(this)
+    private var adapterRss: RssAdapter = RssAdapter()
     private lateinit var viewModelRss: ViewModelRssNews
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +31,15 @@ class NewsRecyclerActivity : AppCompatActivity(), RssAdapter.ItemClickListener {
 
 
         if (newsName != null) {
-            observeRssList(newsName)
+            requestApi(newsName)
+            getRssEntityList(newsName)
         } else{
             toast("ERROR: NOT DATA")
         }
+
         setupRecyclerView()
         setToolbar(newsName)
+        observeRssList()
 
     }
 
@@ -48,36 +52,48 @@ class NewsRecyclerActivity : AppCompatActivity(), RssAdapter.ItemClickListener {
     }
 
 
-    override fun onFavoriteClick(item: RssEntity) {
-//        viewModelRss.apply {
-//            updateListForRecycle(item)
-//            favorites.observe(this@NewsRecyclerActivity){
-//                if (!it) toast(MESSAGE_IS_NOT_FAVORITES)
-//                else toast(MESSAGE_IS_FAVORITES)
-//            }
-//        }
+    private fun requestApi(newsName: String) = with(viewModelRss){
+        loadRssInfo(newsName)
+    }
+
+    private fun getRssEntityList(newsName: String) = with(viewModelRss){
+        Log.d("TAG", "NewsRecyclerActivity getRssEntityList")
+        getListRssEntity(newsName)
     }
 
     private fun setupRecyclerView(){
         binding.rssRecycler.apply {
             layoutManager = LinearLayoutManager(this@NewsRecyclerActivity)
             adapter = adapterRss
-            setHasFixedSize(true)
+        }
+        setupClickFavorites()
+
+    }
+
+    private fun setupClickAdapterItem(){
+        adapterRss.itemClickListener = {
+        }
+
+    }
+
+    private fun setupClickFavorites(){
+        adapterRss.itemFavoritesListener = {
+            Log.d("TAG", "NewsRecyclerActivity setupClickFavorites $it")
+            viewModelRss.setFavoritesStatus(it)
         }
     }
 
-    private fun observeRssList(newsName: String){
+    private fun observeRssList(){
 
         viewModelRss.apply {
 
-            loadRssInfo(newsName)
-            getListRssEntity(newsName)
-
             getListRss.observe(this@NewsRecyclerActivity){
-                adapterRss.updateRssList(it)
+                Log.d("TAG", "NewsRecyclerActivity getListRss $it")
+                adapterRss.submitList(it)
             }
 
             errorConnection.observe(this@NewsRecyclerActivity){if (!it) toast(MESSAGE_ERROR)}
+
             isLoading.observe(this@NewsRecyclerActivity){
                 binding.progressBarLoading.visibility = if (it) View.VISIBLE else View.GONE
             }

@@ -20,7 +20,9 @@ abstract class RssDatabase: RoomDatabase() {
                 return table
             }
             synchronized(this){
-                val tableRssNews = Room.databaseBuilder(context, RssDatabase::class.java, "RssNews").build()
+                val tableRssNews = Room.databaseBuilder(
+                    context, RssDatabase::class.java, "RssNews"
+                ).build()
                 RSS_TABLE = tableRssNews
                 return tableRssNews
             }

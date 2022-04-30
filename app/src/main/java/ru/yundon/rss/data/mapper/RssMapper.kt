@@ -29,7 +29,7 @@ class RssMapper {
                 description = it.description,
                 pubDate = it.pubDate,
                 imageUrl = it.imageUrl,
-                isFavorites = false
+                isFavorites = it.isFavorites
             )
         }
     }

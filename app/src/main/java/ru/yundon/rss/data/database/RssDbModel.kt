@@ -6,11 +6,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "rss_table")
 data class RssDbModel(
-    @PrimaryKey var title: String,
+    @PrimaryKey
+    var title: String,
     val typeNews: String,
     val link: String,
     val description: String,
     val pubDate: String,
     @ColumnInfo(name = "url")var imageUrl: String,
-    val isFavorites: Boolean = false
+    var isFavorites: Boolean = false
 )
