@@ -1,6 +1,7 @@
 package ru.yundon.rss.domain
 
 import kotlinx.coroutines.flow.Flow
+import ru.yundon.rss.domain.model.RssEntity
 
 interface RssRepository {
 

@@ -1,7 +1,9 @@
-package ru.yundon.rss.domain
+package ru.yundon.rss.domain.usecases
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
+import ru.yundon.rss.domain.RssRepository
+import ru.yundon.rss.domain.model.RssEntity
 
 class GetRssInfoUseCase(private val repository: RssRepository) {
 

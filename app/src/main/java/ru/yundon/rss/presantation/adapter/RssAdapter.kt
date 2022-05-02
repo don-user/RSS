@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.squareup.picasso.Picasso
 import ru.yundon.rss.R
 import ru.yundon.rss.databinding.RssNewsItemBinding
-import ru.yundon.rss.domain.RssEntity
+import ru.yundon.rss.domain.model.RssEntity
 
 
 class RssAdapter : ListAdapter<RssEntity, RssViewHolder>(RssDiffCallback()) {

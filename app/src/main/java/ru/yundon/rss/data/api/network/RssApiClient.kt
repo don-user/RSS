@@ -1,4 +1,4 @@
-package ru.yundon.rss.data.api.response
+package ru.yundon.rss.data.api.network
 
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory

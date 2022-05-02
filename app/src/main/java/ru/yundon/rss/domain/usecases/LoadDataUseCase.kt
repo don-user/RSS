@@ -1,4 +1,6 @@
-package ru.yundon.rss.domain
+package ru.yundon.rss.domain.usecases
+
+import ru.yundon.rss.domain.RssRepository
 
 
 class LoadDataUseCase(private val repository: RssRepository){

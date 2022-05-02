@@ -1,4 +1,4 @@
-package ru.yundon.rss.presantation.ui.news
+package ru.yundon.rss.presantation.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
