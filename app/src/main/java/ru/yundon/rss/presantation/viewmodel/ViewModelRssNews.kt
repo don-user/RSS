@@ -4,7 +4,10 @@ import android.app.Application
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import ru.yundon.rss.data.repository.RssRepositoryImpl
-import ru.yundon.rss.domain.*
+import ru.yundon.rss.domain.model.RssEntity
+import ru.yundon.rss.domain.usecases.GetRssInfoUseCase
+import ru.yundon.rss.domain.usecases.IsFavoritesUseCase
+import ru.yundon.rss.domain.usecases.LoadDataUseCase
 
 class ViewModelRssNews(application: Application): AndroidViewModel(application) {
 

@@ -1,4 +1,4 @@
-package ru.yundon.rss.domain
+package ru.yundon.rss.domain.model
 
 data class RssEntity(
     val title: String,

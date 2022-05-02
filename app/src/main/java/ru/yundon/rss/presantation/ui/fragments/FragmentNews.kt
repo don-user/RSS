@@ -1,34 +1,44 @@
-package ru.yundon.rss.presantation.ui.secondactivity
+package ru.yundon.rss.presantation.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import ru.yundon.rss.databinding.ActivityNewsRecyclerBinding
+import ru.yundon.rss.databinding.FragmentNewsBinding
 import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.presantation.viewmodel.ViewModelRssNews
-import ru.yundon.rss.utils.Constants.EXTRA
-import ru.yundon.rss.utils.Constants.MESSAGE_ERROR
+import ru.yundon.rss.utils.Constants
+import ru.yundon.rss.utils.Constants.EXCEPTION_MESSAGE_PARAM
 
-class NewsRecyclerActivity : AppCompatActivity() {
+class FragmentNews: Fragment() {
 
-    private lateinit var binding: ActivityNewsRecyclerBinding
+    private var _binding: FragmentNewsBinding? = null
+    private val binding: FragmentNewsBinding
+        get() = _binding ?: throw RuntimeException(EXCEPTION_MESSAGE_PARAM)
+
     private var adapterRss: RssAdapter = RssAdapter()
     private lateinit var viewModelRss: ViewModelRssNews
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityNewsRecyclerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentNewsBinding.inflate(inflater, container, false)
 
         viewModelRss = ViewModelProvider(this)[ViewModelRssNews::class.java]
 
-        val newsName = intent.getStringExtra(EXTRA)
+        return binding.root
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        val newsName = requireArguments().getString("KEY_ARGS")
 
         if (newsName != null) {
             requestApi(newsName)
@@ -38,19 +48,10 @@ class NewsRecyclerActivity : AppCompatActivity() {
         }
 
         setupRecyclerView()
-        setToolbar(newsName)
+//        setToolbar(newsName)
         observeRssList()
 
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> finish()
-            else -> return super.onOptionsItemSelected(item)
-        }
-        return true
-    }
-
 
     private fun requestApi(newsName: String) = with(viewModelRss){
         loadRssInfo(newsName)
@@ -63,7 +64,6 @@ class NewsRecyclerActivity : AppCompatActivity() {
 
     private fun setupRecyclerView(){
         binding.rssRecycler.apply {
-            layoutManager = LinearLayoutManager(this@NewsRecyclerActivity)
             adapter = adapterRss
         }
         setupClickFavorites()
@@ -87,27 +87,21 @@ class NewsRecyclerActivity : AppCompatActivity() {
 
         viewModelRss.apply {
 
-            getListRss.observe(this@NewsRecyclerActivity){
+            getListRss.observe(viewLifecycleOwner){
                 Log.d("TAG", "NewsRecyclerActivity getListRss $it")
                 adapterRss.submitList(it)
             }
 
-            errorConnection.observe(this@NewsRecyclerActivity){if (!it) toast(MESSAGE_ERROR)}
+            errorConnection.observe(viewLifecycleOwner){if (!it) toast(Constants.MESSAGE_ERROR)}
 
-            isLoading.observe(this@NewsRecyclerActivity){
+            isLoading.observe(viewLifecycleOwner){
                 binding.progressBarLoading.visibility = if (it) View.VISIBLE else View.GONE
             }
         }
     }
 
-    private fun setToolbar(titleToolbar: String?){
-        setSupportActionBar(binding.toolbarRss)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.title = titleToolbar
-    }
-
     private fun toast(text: String){
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
     }
 }
+

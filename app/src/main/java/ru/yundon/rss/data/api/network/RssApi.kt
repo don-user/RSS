@@ -1,4 +1,4 @@
-package ru.yundon.rss.data.api.response
+package ru.yundon.rss.data.api.network
 
 import retrofit2.http.GET
 import ru.yundon.rss.data.api.dto.RssResponseDto

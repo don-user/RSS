@@ -2,7 +2,7 @@ package ru.yundon.rss.data.mapper
 
 import ru.yundon.rss.data.api.dto.RssItemDto
 import ru.yundon.rss.data.database.RssDbModel
-import ru.yundon.rss.domain.RssEntity
+import ru.yundon.rss.domain.model.RssEntity
 
 class RssMapper {
 
