@@ -1,5 +1,7 @@
 package ru.yundon.rss.presantation.ui.fragments
 
+import android.annotation.SuppressLint
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,13 +9,20 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import ru.yundon.rss.R
 import ru.yundon.rss.databinding.FragmentNewsBinding
 import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.presantation.viewmodel.ViewModelRssNews
+import ru.yundon.rss.utils.ChromeCustomTabHelper
 import ru.yundon.rss.utils.Constants
 import ru.yundon.rss.utils.Constants.EXCEPTION_MESSAGE_PARAM
+import ru.yundon.rss.utils.Constants.KEY_ARGS
+import ru.yundon.rss.utils.Constants.MESSAGE_ERROR_ARGS
 
 class FragmentNews: Fragment() {
 
@@ -22,13 +31,13 @@ class FragmentNews: Fragment() {
         get() = _binding ?: throw RuntimeException(EXCEPTION_MESSAGE_PARAM)
 
     private var adapterRss: RssAdapter = RssAdapter()
-    private lateinit var viewModelRss: ViewModelRssNews
+    private val viewModelRss by lazy {
+        ViewModelProvider(this)[ViewModelRssNews::class.java]
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
-
-        viewModelRss = ViewModelProvider(this)[ViewModelRssNews::class.java]
 
         return binding.root
 
@@ -38,18 +47,18 @@ class FragmentNews: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val newsName = requireArguments().getString("KEY_ARGS")
+        val newsName = requireArguments().getString(KEY_ARGS)
 
         if (newsName != null) {
             requestApi(newsName)
             getRssEntityList(newsName)
         } else{
-            toast("ERROR: NOT DATA")
+            throw RuntimeException(MESSAGE_ERROR_ARGS)
         }
 
         setupRecyclerView()
-//        setToolbar(newsName)
         observeRssList()
+
 
     }
 
@@ -62,26 +71,22 @@ class FragmentNews: Fragment() {
         getListRssEntity(newsName)
     }
 
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         binding.rssRecycler.apply {
             adapter = adapterRss
         }
-        setupClickFavorites()
 
-    }
-
-    private fun setupClickAdapterItem(){
-        adapterRss.itemClickListener = {
-        }
-
-    }
-
-    private fun setupClickFavorites(){
-        adapterRss.itemFavoritesListener = {
-            Log.d("TAG", "NewsRecyclerActivity setupClickFavorites $it")
-            viewModelRss.setFavoritesStatus(it)
+        adapterRss.apply {
+            itemClickListener = {
+                ChromeCustomTabHelper.openCct(requireContext(), it.link)
+            }
+            itemFavoritesListener = {
+                Log.d("TAG", "NewsRecyclerActivity setupClickFavorites $it")
+                viewModelRss.setFavoritesStatus(it)
+            }
         }
     }
+
 
     private fun observeRssList(){
 

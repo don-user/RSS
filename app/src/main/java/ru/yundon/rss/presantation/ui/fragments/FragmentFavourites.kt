@@ -9,13 +9,16 @@ import androidx.lifecycle.ViewModelProvider
 import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.databinding.FragmentFavouritesBinding
 import ru.yundon.rss.presantation.viewmodel.ViewModelRssNews
+import ru.yundon.rss.utils.ChromeCustomTabHelper
+import ru.yundon.rss.utils.Constants
+import ru.yundon.rss.utils.Constants.EXCEPTION_MESSAGE_PARAM
 import java.lang.RuntimeException
 
 class FragmentFavourites: Fragment() {
 
     private var _binding: FragmentFavouritesBinding? = null
     private val binding: FragmentFavouritesBinding
-    get() = _binding ?: throw RuntimeException()
+        get() = _binding ?: throw RuntimeException(EXCEPTION_MESSAGE_PARAM)
 
     private var adapterRss = RssAdapter()
 
@@ -50,7 +53,7 @@ class FragmentFavourites: Fragment() {
                 viewModelRss.setFavoritesStatus(it)
             }
             itemClickListener = {
-
+                ChromeCustomTabHelper.openCct(requireContext(), it.link)
             }
         }
     }
