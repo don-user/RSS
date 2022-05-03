@@ -8,5 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="unchecked">#402525</color>
-    <color name="orange">#FF7E38</color>
+    <color name="orange">#D5532A</color>
+    <color name="grey_50">#E8EAF6</color>
+    <color name="grey_200">#C5CAE9</color>
+    <color name="grey_500">#737A9F</color>
+    <color name="grey_700">#52576E</color>
 </resources>

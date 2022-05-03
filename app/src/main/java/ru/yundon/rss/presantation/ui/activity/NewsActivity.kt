@@ -25,8 +25,6 @@ class NewsActivity : AppCompatActivity() {
                 as NavHostFragment).navController
     }
 
-//    private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -36,19 +34,6 @@ class NewsActivity : AppCompatActivity() {
         setBottomNavigationController(newsName)
         setToolbar(newsName)
 
-//        navHostController.addOnDestinationChangedListener{ _, destination, _ ->
-//            if (destination.id == R.id.news){
-//                val args = NavArgument.Builder().setDefaultValue(newsName!!).build()
-//                destination.addArgument("KEY", args)
-//            }
-//        }
-
-//
-//        binding.apply {
-//            navController = (supportFragmentManager.findFragmentById(R.id.mainNavHostFragment) as NavHostFragment).navController
-//            navController.
-//            bottomNavigation.setupWithNavController(navController)
-//        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

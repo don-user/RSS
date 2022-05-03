@@ -28,7 +28,6 @@ class RssAdapter : ListAdapter<RssEntity, RssViewHolder>(RssDiffCallback()) {
         with(holder.itemBinding){
             dateNews.text = rssNewsItem.pubDate
             nameNews.text = rssNewsItem.title
-            itemLink.text = rssNewsItem.link
 
             Picasso.get()
                 .load(rssNewsItem.imageUrl)
