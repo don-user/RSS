@@ -17,7 +17,7 @@ import ru.yundon.rss.R
 object ChromeCustomTabHelper {
 
     fun openCct(context: Context, link: String){
-        val colorOrange = ContextCompat.getColor(context, R.color.orange)
+        val colorOrange = ContextCompat.getColor(context, R.color.grey_200)
         val setColors = CustomTabColorSchemeParams.Builder()
             .setToolbarColor(colorOrange)
             .build()

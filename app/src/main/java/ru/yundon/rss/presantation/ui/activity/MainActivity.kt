@@ -2,6 +2,7 @@ package ru.yundon.rss.presantation.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import ru.yundon.rss.R
 import ru.yundon.rss.databinding.ActivityMainBinding
 import ru.yundon.rss.utils.TypeOfNews
 
@@ -43,5 +44,6 @@ class MainActivity: AppCompatActivity() {
     private fun launchActivity(newsName: String){
         startActivity(NewsActivity.newIntentNews(this@MainActivity, newsName) )
     }
+
 }
 

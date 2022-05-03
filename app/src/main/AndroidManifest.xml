@@ -13,10 +13,7 @@
         android:theme="@style/Theme.RSS">
         <activity
             android:name=".presantation.ui.activity.NewsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presantation.ui.activity.NewsRecyclerActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".presantation.ui.activity.MainActivity"
             android:exported="true">
