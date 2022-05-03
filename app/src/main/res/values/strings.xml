@@ -7,4 +7,6 @@
     <string name="gadgetsNews">Новости - гаджеты</string>
     <string name="softNews">Новости - софт</string>
     <string name="gameNews">Новости - игры</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

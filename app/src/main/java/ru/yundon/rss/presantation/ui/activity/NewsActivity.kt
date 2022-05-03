@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import ru.yundon.rss.R
 import ru.yundon.rss.databinding.ActivityNewsBinding
 import ru.yundon.rss.utils.Constants.EXTRA
+import ru.yundon.rss.utils.Constants.KEY_ARGS
 
 class NewsActivity : AppCompatActivity() {
 
@@ -64,7 +65,7 @@ class NewsActivity : AppCompatActivity() {
 
     private fun setBottomNavigationController(newsName: String){
         val bundle = Bundle().apply {
-            putString("KEY_ARGS", newsName)
+            putString(KEY_ARGS, newsName)
         }
         navHostController.navigate(R.id.news, bundle)
         binding.bottomNavigation.setupWithNavController(navHostController)
