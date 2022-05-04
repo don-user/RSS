@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ru.yundon.rss.R
 import ru.yundon.rss.databinding.ActivityNewsBinding
+import ru.yundon.rss.utils.Constants.EMPTY_INTENT
 import ru.yundon.rss.utils.Constants.EXTRA
 import ru.yundon.rss.utils.Constants.KEY_ARGS
 
@@ -26,7 +27,7 @@ class NewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val newsName = intent.getStringExtra(EXTRA) ?: throw RuntimeException("Empty Intent!")
+        val newsName = intent.getStringExtra(EXTRA) ?: throw RuntimeException(EMPTY_INTENT)
 
         setBottomNavigationController(newsName)
         setToolbar(newsName)

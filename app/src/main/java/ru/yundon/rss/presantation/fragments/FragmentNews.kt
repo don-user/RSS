@@ -33,7 +33,9 @@ class FragmentNews: Fragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -98,7 +100,9 @@ class FragmentNews: Fragment() {
                 adapterRss.submitList(it)
             }
 
-            errorConnection.observe(viewLifecycleOwner){if (!it) toast(requireContext(), MESSAGE_ERROR)}
+            errorConnection.observe(viewLifecycleOwner){
+                if (!it) toast(requireContext(), MESSAGE_ERROR)
+            }
 
             isLoading.observe(viewLifecycleOwner){
                 binding.progressBarLoading.visibility = if (it) View.VISIBLE else View.GONE
