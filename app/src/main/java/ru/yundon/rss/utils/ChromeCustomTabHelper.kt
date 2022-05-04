@@ -33,6 +33,5 @@ object ChromeCustomTabHelper {
             }
             .build()
             .launchUrl(context, Uri.parse(link))
-
     }
 }

@@ -6,7 +6,7 @@ object Constants {
 
     const val EXTRA = "Extra"
     const val KEY_ARGS = "KEY_ARGS"
-    const val KEY_ARGS_CCT = "key_args_cct"
+    const val EMPTY_INTENT = "Empty Intent!"
 
     const val MESSAGE_IS_FAVORITES = "Новость добавлена в избранное"
     const val MESSAGE_IS_NOT_FAVORITES = "Новость удалена из избранного"
