@@ -1,4 +1,4 @@
-package ru.yundon.rss.presantation.ui.fragments
+package ru.yundon.rss.presantation.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.databinding.FragmentFavouritesBinding
 import ru.yundon.rss.presantation.viewmodel.ViewModelRssNews
 import ru.yundon.rss.utils.ChromeCustomTabHelper
-import ru.yundon.rss.utils.Constants
 import ru.yundon.rss.utils.Constants.EXCEPTION_MESSAGE_PARAM
 import java.lang.RuntimeException
 

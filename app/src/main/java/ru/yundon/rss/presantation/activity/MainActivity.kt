@@ -1,9 +1,9 @@
-package ru.yundon.rss.presantation.ui.activity
+package ru.yundon.rss.presantation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ru.yundon.rss.R
 import ru.yundon.rss.databinding.ActivityMainBinding
+import ru.yundon.rss.presantation.dialog.ExitDialog
 import ru.yundon.rss.utils.TypeOfNews
 
 class MainActivity: AppCompatActivity() {
@@ -18,6 +18,10 @@ class MainActivity: AppCompatActivity() {
         setContentView(binding.root)
         buttonsClick()
 
+    }
+
+    override fun onBackPressed() {
+        ExitDialog.showDialog(this)
     }
 
     private fun buttonsClick() = with(binding){

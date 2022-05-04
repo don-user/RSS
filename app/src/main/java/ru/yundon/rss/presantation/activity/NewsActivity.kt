@@ -1,13 +1,10 @@
-package ru.yundon.rss.presantation.ui.activity
+package ru.yundon.rss.presantation.activity
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.navigation.NavArgument
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ru.yundon.rss.R

@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RSS">
         <activity
-            android:name=".presantation.ui.activity.NewsActivity"
+            android:name="ru.yundon.rss.presantation.activity.NewsActivity"
             android:exported="false"/>
         <activity
-            android:name=".presantation.ui.activity.MainActivity"
+            android:name="ru.yundon.rss.presantation.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

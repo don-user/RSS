@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/news"
-        android:name="ru.yundon.rss.presantation.ui.fragments.FragmentNews"
+        android:name="ru.yundon.rss.presantation.fragments.FragmentNews"
         tools:layout="@layout/fragment_news" >
         <argument
             android:name="KEY_ARGS"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/favourites"
-        android:name="ru.yundon.rss.presantation.ui.fragments.FragmentFavourites"
+        android:name="ru.yundon.rss.presantation.fragments.FragmentFavourites"
         tools:layout="@layout/fragment_favourites" />
 
 
