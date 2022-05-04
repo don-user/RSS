@@ -15,7 +15,11 @@ import ru.yundon.rss.utils.ChromeCustomTabHelper
 import ru.yundon.rss.utils.Constants
 import ru.yundon.rss.utils.Constants.EXCEPTION_MESSAGE_PARAM
 import ru.yundon.rss.utils.Constants.KEY_ARGS
+import ru.yundon.rss.utils.Constants.MESSAGE_ERROR
 import ru.yundon.rss.utils.Constants.MESSAGE_ERROR_ARGS
+import ru.yundon.rss.utils.Constants.MESSAGE_IS_FAVORITES
+import ru.yundon.rss.utils.Constants.MESSAGE_IS_NOT_FAVORITES
+import ru.yundon.rss.utils.MakeToast.toast
 
 class FragmentNews: Fragment() {
 
@@ -76,6 +80,10 @@ class FragmentNews: Fragment() {
             itemFavoritesListener = {
                 Log.d("TAG", "NewsRecyclerActivity setupClickFavorites $it")
                 viewModelRss.setFavoritesStatus(it)
+                toast (requireContext(),
+                    if (it.isFavorites) MESSAGE_IS_NOT_FAVORITES
+                    else MESSAGE_IS_FAVORITES
+                )
             }
         }
     }
@@ -90,7 +98,7 @@ class FragmentNews: Fragment() {
                 adapterRss.submitList(it)
             }
 
-            errorConnection.observe(viewLifecycleOwner){if (!it) toast(Constants.MESSAGE_ERROR)}
+            errorConnection.observe(viewLifecycleOwner){if (!it) toast(requireContext(), MESSAGE_ERROR)}
 
             isLoading.observe(viewLifecycleOwner){
                 binding.progressBarLoading.visibility = if (it) View.VISIBLE else View.GONE
@@ -98,8 +106,6 @@ class FragmentNews: Fragment() {
         }
     }
 
-    private fun toast(text: String){
-        Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
-    }
+
 }
 
