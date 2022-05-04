@@ -10,7 +10,10 @@ import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.databinding.FragmentFavouritesBinding
 import ru.yundon.rss.presantation.viewmodel.ViewModelRssNews
 import ru.yundon.rss.utils.ChromeCustomTabHelper
+import ru.yundon.rss.utils.Constants
 import ru.yundon.rss.utils.Constants.EXCEPTION_MESSAGE_PARAM
+import ru.yundon.rss.utils.Constants.MESSAGE_IS_NOT_FAVORITES
+import ru.yundon.rss.utils.MakeToast
 import java.lang.RuntimeException
 
 class FragmentFavourites: Fragment() {
@@ -50,6 +53,7 @@ class FragmentFavourites: Fragment() {
         adapterRss.apply {
             itemFavoritesListener = {
                 viewModelRss.setFavoritesStatus(it)
+                MakeToast.toast(requireContext(), MESSAGE_IS_NOT_FAVORITES)
             }
             itemClickListener = {
                 ChromeCustomTabHelper.openCct(requireContext(), it.link)

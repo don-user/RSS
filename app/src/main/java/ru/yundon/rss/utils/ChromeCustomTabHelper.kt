@@ -24,8 +24,8 @@ object ChromeCustomTabHelper {
 
         CustomTabsIntent.Builder()
             .setDefaultColorSchemeParams(setColors)
-//            .setStartAnimations(context, R.anim.nav_default_enter_anim, R.anim.nav_default_pop_enter_anim)
-//            .setExitAnimations(context, R.anim.nav_default_exit_anim, R.anim.nav_default_pop_exit_anim)
+            .setStartAnimations(context, android.R.anim.fade_in, android.R.anim.fade_out)
+            .setExitAnimations(context,android.R.anim.fade_in, android.R.anim.fade_out)
             .let { ctb ->
                 AppCompatResources.getDrawable(context, R.drawable.arrow_back)!!.let {
                     ctb.setCloseButtonIcon(it.toBitmap())

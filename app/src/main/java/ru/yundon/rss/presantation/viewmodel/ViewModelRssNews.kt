@@ -26,8 +26,6 @@ class ViewModelRssNews(application: Application): AndroidViewModel(application) 
     val errorConnection: LiveData<Boolean>
         get() = _errorConnection
 
-
-
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 

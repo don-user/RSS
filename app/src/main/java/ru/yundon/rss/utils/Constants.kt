@@ -14,4 +14,5 @@ object Constants {
     const val MESSAGE_ERROR_ARGS = "ERROR: Нет данных для аргумента из активити"
 
     const val EXCEPTION_MESSAGE_PARAM = "Param screen name is absent"
+
 }
