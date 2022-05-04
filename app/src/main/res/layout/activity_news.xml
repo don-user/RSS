@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E3E2E2"
     tools:menu="@menu/bottom_menu">
 
     <androidx.appcompat.widget.Toolbar

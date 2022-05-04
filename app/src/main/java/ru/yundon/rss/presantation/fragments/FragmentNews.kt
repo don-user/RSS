@@ -1,20 +1,13 @@
-package ru.yundon.rss.presantation.ui.fragments
+package ru.yundon.rss.presantation.fragments
 
-import android.annotation.SuppressLint
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.browser.customtabs.CustomTabColorSchemeParams
-import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.yundon.rss.R
 import ru.yundon.rss.databinding.FragmentNewsBinding
 import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.presantation.viewmodel.ViewModelRssNews
