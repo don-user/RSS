@@ -4,6 +4,8 @@ object Constants {
 
     const val BASE_URL = "https://3dnews.ru/"
 
+    const val TABLE_NAME = "RssNews"
+
     const val EXTRA = "Extra"
     const val KEY_ARGS = "KEY_ARGS"
     const val EMPTY_INTENT = "Empty Intent!"
