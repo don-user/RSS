@@ -1,20 +1,22 @@
 package ru.yundon.rss.presantation.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.yundon.rss.presantation.adapter.RssAdapter
 import ru.yundon.rss.databinding.FragmentFavouritesBinding
+import ru.yundon.rss.presantation.RssNewsApp
+import ru.yundon.rss.presantation.adapter.RssAdapter
+import ru.yundon.rss.presantation.viewmodel.ViewModelFactory
 import ru.yundon.rss.presantation.viewmodel.ViewModelRssNews
 import ru.yundon.rss.utils.ChromeCustomTabHelper
-import ru.yundon.rss.utils.Constants
 import ru.yundon.rss.utils.Constants.EXCEPTION_MESSAGE_PARAM
 import ru.yundon.rss.utils.Constants.MESSAGE_IS_NOT_FAVORITES
 import ru.yundon.rss.utils.MakeToast
-import java.lang.RuntimeException
+import javax.inject.Inject
 
 class FragmentFavourites: Fragment() {
 
@@ -24,11 +26,21 @@ class FragmentFavourites: Fragment() {
 
     private var adapterRss = RssAdapter()
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModelRss by lazy {
-        ViewModelProvider(this)[ViewModelRssNews::class.java]
+        ViewModelProvider(this, viewModelFactory)[ViewModelRssNews::class.java]
     }
 
+    private val component by lazy {
+        (requireActivity().application as RssNewsApp).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {

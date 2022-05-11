@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import ru.yundon.rss.utils.Constants.TABLE_NAME
 
 @Database(entities = [RssDbModel::class], version = 1, exportSchema = false)
 abstract class RssDatabase: RoomDatabase() {
@@ -21,7 +22,7 @@ abstract class RssDatabase: RoomDatabase() {
             }
             synchronized(this){
                 val tableRssNews = Room.databaseBuilder(
-                    context, RssDatabase::class.java, "RssNews"
+                    context, RssDatabase::class.java, TABLE_NAME
                 ).build()
                 RSS_TABLE = tableRssNews
                 return tableRssNews

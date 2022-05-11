@@ -1,20 +1,18 @@
 package ru.yundon.rss.presantation.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
-import ru.yundon.rss.data.repository.RssRepositoryImpl
 import ru.yundon.rss.domain.model.RssEntity
 import ru.yundon.rss.domain.usecases.GetRssInfoUseCase
 import ru.yundon.rss.domain.usecases.IsFavoritesUseCase
 import ru.yundon.rss.domain.usecases.LoadDataUseCase
+import javax.inject.Inject
 
-class ViewModelRssNews(application: Application): AndroidViewModel(application) {
-
-    private val repository = RssRepositoryImpl(application)
-    private val getRssInfoUseCase = GetRssInfoUseCase(repository)
-    private val loadDataUseCase = LoadDataUseCase(repository)
-    private val isFavoritesUseCase = IsFavoritesUseCase(repository)
+class ViewModelRssNews @Inject constructor(
+    private val getRssInfoUseCase: GetRssInfoUseCase,
+    private val loadDataUseCase: LoadDataUseCase,
+    private val isFavoritesUseCase: IsFavoritesUseCase
+): ViewModel() {
 
     private var _getListRss = MutableLiveData<List<RssEntity>>()
     val getListRss: LiveData<List<RssEntity>>

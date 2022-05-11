@@ -1,18 +1,19 @@
 package ru.yundon.rss.presantation.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.yundon.rss.databinding.FragmentNewsBinding
+import ru.yundon.rss.presantation.RssNewsApp
 import ru.yundon.rss.presantation.adapter.RssAdapter
+import ru.yundon.rss.presantation.viewmodel.ViewModelFactory
 import ru.yundon.rss.presantation.viewmodel.ViewModelRssNews
 import ru.yundon.rss.utils.ChromeCustomTabHelper
-import ru.yundon.rss.utils.Constants
 import ru.yundon.rss.utils.Constants.EXCEPTION_MESSAGE_PARAM
 import ru.yundon.rss.utils.Constants.KEY_ARGS
 import ru.yundon.rss.utils.Constants.MESSAGE_ERROR
@@ -20,6 +21,7 @@ import ru.yundon.rss.utils.Constants.MESSAGE_ERROR_ARGS
 import ru.yundon.rss.utils.Constants.MESSAGE_IS_FAVORITES
 import ru.yundon.rss.utils.Constants.MESSAGE_IS_NOT_FAVORITES
 import ru.yundon.rss.utils.MakeToast.toast
+import javax.inject.Inject
 
 class FragmentNews: Fragment() {
 
@@ -28,10 +30,22 @@ class FragmentNews: Fragment() {
         get() = _binding ?: throw RuntimeException(EXCEPTION_MESSAGE_PARAM)
 
     private var adapterRss: RssAdapter = RssAdapter()
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private val viewModelRss by lazy {
-        ViewModelProvider(this)[ViewModelRssNews::class.java]
+        ViewModelProvider(this, viewModelFactory)[ViewModelRssNews::class.java]
     }
 
+    private val component by lazy {
+        (requireActivity().application as RssNewsApp).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -66,7 +80,6 @@ class FragmentNews: Fragment() {
     }
 
     private fun getRssEntityList(newsName: String) = with(viewModelRss){
-        Log.d("TAG", "NewsRecyclerActivity getRssEntityList")
         getListRssEntity(newsName)
     }
 
@@ -80,7 +93,6 @@ class FragmentNews: Fragment() {
                 ChromeCustomTabHelper.openCct(requireContext(), it.link)
             }
             itemFavoritesListener = {
-                Log.d("TAG", "NewsRecyclerActivity setupClickFavorites $it")
                 viewModelRss.setFavoritesStatus(it)
                 toast (requireContext(),
                     if (it.isFavorites) MESSAGE_IS_NOT_FAVORITES
@@ -90,13 +102,11 @@ class FragmentNews: Fragment() {
         }
     }
 
-
     private fun observeRssList(){
 
         viewModelRss.apply {
 
             getListRss.observe(viewLifecycleOwner){
-                Log.d("TAG", "NewsRecyclerActivity getListRss $it")
                 adapterRss.submitList(it)
             }
 
@@ -109,7 +119,5 @@ class FragmentNews: Fragment() {
             }
         }
     }
-
-
 }
 

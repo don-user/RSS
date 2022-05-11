@@ -3,8 +3,9 @@ package ru.yundon.rss.data.mapper
 import ru.yundon.rss.data.api.dto.RssItemDto
 import ru.yundon.rss.data.database.RssDbModel
 import ru.yundon.rss.domain.model.RssEntity
+import javax.inject.Inject
 
-class RssMapper {
+class RssMapper @Inject constructor() {
 
     fun mapDtoListToDbModelList(dtoList: List<RssItemDto>, newsName: String) : List<RssDbModel>{
         return dtoList.map {
