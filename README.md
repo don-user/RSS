@@ -15,20 +15,20 @@
 
 Проект реализован на 2-х Активити и 2 Фрагментах с использованием :
 
-Патерна MVVM
-View Binding
+- Патерна MVVM
+- View Binding
 
 а так же библиотек:
 
-Retrofit
-Okhttp3
-Coroutines
-Navigation
-Room
-Picasso
-Livedata
-ViewModel
-Tickaroo
+- Retrofit
+- Okhttp3
+- Coroutines
+- Navigation
+- Room
+- Picasso
+- Livedata
+- ViewModel
+- Tickaroo
 
 Рефакторинг проекта:
 
